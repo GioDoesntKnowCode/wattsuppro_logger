@@ -11,10 +11,8 @@ FULLHANDLING = 2
 
 class WattsUp(object):
     def __init__(self, port, interval):
-        if args.sim:
-            self.s = open(port,'r')     # not a serial port, but a file
-        else:
-            self.s = serial.Serial(port, 115200 )
+
+        self.s = serial.Serial(port, 115200 )
         self.logfile = None
         self.interval = interval
         # initialize lists for keeping data
@@ -24,8 +22,6 @@ class WattsUp(object):
         self.current = []
 
     def mode(self, runmode):
-        if args.sim:
-            return                      # can't set run mode while in simulation
         temp = '#L,W,3,%s,,%d;' % (runmode, self.interval)
         self.s.write( str.encode(temp))
         if runmode == INTERNAL_MODE:
@@ -33,8 +29,7 @@ class WattsUp(object):
 
     def log(self, logfile = None):
         print('Logging...')
-        if not args.sim:
-            self.mode(EXTERNAL_MODE)
+        self.mode(EXTERNAL_MODE)
         if logfile:
             self.logfile = logfile
             o = open(self.logfile,'w')
@@ -45,8 +40,6 @@ class WattsUp(object):
         
 
         while time.time() < timeout_start + args.timeout:
-            if args.sim:
-                time.sleep(self.interval)
             if line.startswith( str.encode('#d') ):
                 if args.raw:
                     r.write(line)
@@ -77,19 +70,7 @@ def main(args):
         if system == 'Darwin':          # Mac OS X
             args.port = '/dev/tty.usbserial-A1000wT3'
         elif system == 'Linux':
-            args.port = '/dev/ttyUSB0'
-    if not os.path.exists(args.port):
-        if not args.sim:
-            print( '')
-            print( 'Serial port %s does not exist.' % args.port)
-            print( 'Please make sure FDTI drivers are installed')
-            print( ' (http://www.ftdichip.com/Drivers/VCP.htm)')
-            print( 'Default ports are /dev/ttyUSB0 for Linux')
-            print( ' and /dev/tty.usbserial-A1000wT3 for Mac OS X')
-            exit()
-        else:
-            print( '')
-            print( 'File %s does not exist.' % args.port)
+            args.port = '/dev/ttyUSB1'
     meter = WattsUp(args.port, args.interval)
     if args.log:
         meter.log(args.outfile)
@@ -102,6 +83,8 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--sample-interval', dest='interval', default=1.0, type=float, help='Sample interval (default 1 s)')
     parser.add_argument('-p', '--port', dest='port', default=None, help='USB serial port')
     parser.add_argument('-t', '--timeout', dest='timeout', default=10.0, type=float, help='Timeout for experiment (default 10 s)')
+    parser.add_argument('-l', '--log', dest='log', action='store_true', help='log data in real time')
+    parser.add_argument('-m', '--simulation-mode', dest='sim', action='store_true', help='simulate logging by reading serial data from disk with delay of sample interval between lines')
 
     args = parser.parse_args()
     main(args)
