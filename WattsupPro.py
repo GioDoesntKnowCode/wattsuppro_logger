@@ -97,12 +97,6 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Get data from Watts Up power meter.')
-    parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='verbose')
-    parser.add_argument('-d', '--debug', dest='debug', action='store_true', help='debugging output')
-    parser.add_argument('-m', '--simulation-mode', dest='sim', action='store_true', help='simulate logging by reading serial data from disk with delay of sample interval between lines')
-    parser.add_argument('-i', '--internal-mode', dest='internal', action='store_true', help='Set meter to internal logging mode')
-    parser.add_argument('-f', '--fetch', dest='fetch', action='store_true', help='Fetch data stored on the meter (NOT YET WORKING!)')
-    parser.add_argument('-l', '--log', dest='log', action='store_true', help='log data in real time')
     parser.add_argument('-r', '--raw', dest='raw', action='store_true', help='output raw file')
     parser.add_argument('-o', '--outfile', dest='outfile', default='log.out', help='Output file')
     parser.add_argument('-s', '--sample-interval', dest='interval', default=1.0, type=float, help='Sample interval (default 1 s)')
