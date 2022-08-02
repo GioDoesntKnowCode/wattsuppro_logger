@@ -36,6 +36,8 @@ To specify sample interval(default 1s)
 python3 wattsup.py -l -s 10 
 ```
 
+*note, these commands may need to be run with sudo privileges 
+
 ## Notes
 In the case of green lab, be sure which serial port you will be logging from as it may affect the experiments being run by other users, refer [this diagram](https://github.com/GioDoesntKnowCode/wattsuppro_logger/blob/main/Diagram.png) for an overview.
 
