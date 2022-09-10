@@ -45,8 +45,8 @@ In the case of green lab, be sure which serial port you will be logging from as 
 
 | Machine       | Serial port   |
 | ------------- | ------------- |
-| GL1           | /dev/ttyUSB1  |
+| GL1           | ~             |
 | GL2           | /dev/ttyUSB0  |
-| GL4           | /dev/ttyUSB2  |
+| GL4           | /dev/ttyUSB1  |
 
 
