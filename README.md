@@ -13,27 +13,27 @@ The main usecase of this repository will be for conducting experiments with the 
 To run the program in default configuration
 
 ```
-python3 wattsup.py -l
+python3 WattsupPro.py -l
 ```
 
 ## Parameters
 To run with a custom timeout(default 10s)
 ```
-python3 wattsup.py -l -t 500
+python3 WattsupPro.py -l -t 500
 ```
 To run with a custom output file(default log.out)
 ```
-python3 wattsup.py -l -o sample.log
+python3 WattsupPro.py -l -o sample.log
 ```
 
 To specify port(default /dev/ttyUSB0)
 ```
-python3 wattsup.py -l -p /dev/ttyUSB0  
+python3 WattsupPro.py -l -p /dev/ttyUSB0  
 ```
 
 To specify sample interval(default 1s)
 ```
-python3 wattsup.py -l -s 10 
+python3 WattsupPro.py -l -s 10 
 ```
 
 *note, these commands may need to be run with sudo privileges 
@@ -45,8 +45,7 @@ In the case of green lab, be sure which serial port you will be logging from as 
 
 | Machine       | Serial port   |
 | ------------- | ------------- |
-| GL1           | ~             |
 | GL2           | /dev/ttyUSB0  |
+| GL3           | /dev/ttyUSB2  |
 | GL4           | /dev/ttyUSB1  |
-| GL5           | /dev/ttyUSB2  |
 
